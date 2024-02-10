@@ -1,27 +1,55 @@
-# React + TypeScript + Vite
+# Resumo e Instruções para Inicialização do Projeto
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Resumo
 
-Currently, two official plugins are available:
+O desafio de desenvolvimento Open Finance propõe a criação de um módulo de aplicação integrado ao ecossistema de Open Finance, capaz de apresentar uma lista atualizada dos participantes do Open Banking. Essa lista deve incluir informações como nome, logo e URL de configuração/discovery do Authorization Server de cada participante. O objetivo é contribuir para a inovação, concorrência e melhoria na oferta de produtos no sistema financeiro, conforme proposto pelo Banco Central do Brasil.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Instruções para Inicialização do Projeto
 
-## Expanding the ESLint configuration
+Siga as instruções abaixo para iniciar o projeto:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Pré-requisitos
 
-- Configure the top-level `parserOptions` property like this:
+- Certifique-se de ter o Node.js instalado em seu sistema.
+- Utilizaremos o Yarn como gerenciador de pacotes. Caso não tenha instalado, [instale o Yarn](https://yarnpkg.com/getting-started/install).
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+### Passos
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+1. **Clone o repositório:**
+   ```bash
+   git clone https://github.com/seu-usuario/open-finance-challenge.git
+   cd open-finance-challenge
+   ```
+
+2. **Instale as dependências:**
+   ```bash
+   yarn install
+   ```
+
+3. **Configure o ambiente:**
+   - Certifique-se de configurar corretamente o banco de dados, frontend e backend conforme a estrutura do projeto.
+   - Configure as variáveis de ambiente necessárias.
+
+4. **Execute o projeto:**
+   - Inicie o backend:
+     ```bash
+     cd backend
+     yarn start
+     ```
+   - Inicie o frontend:
+     ```bash
+     cd frontend
+     yarn start
+     ```
+
+5. **Acesse a aplicação:**
+   - Abra o navegador e acesse a aplicação no endereço fornecido durante a inicialização do frontend.
+
+6. **Atualização automática da lista:**
+   - O módulo deve atualizar a lista de participantes automaticamente a cada 1 hora. Verifique se esse processo está funcionando corretamente.
+
+### Entrega e Avaliação
+
+- Publique o código-fonte do projeto em um repositório Git.
+- Conceda as permissões de acesso ao repositório conforme acordado.
+- Agende uma apresentação dos resultados do projeto após a entrega na data combinada.
