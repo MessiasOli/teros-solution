@@ -1,0 +1,10 @@
+.label-title{
+    transition: var(--transition);
+    border-bottom: 1px solid #0000;
+}
+
+
+.label-title:hover{
+    border-bottom: 1px solid var(--color-primary);
+    margin-left: 1rem;
+}

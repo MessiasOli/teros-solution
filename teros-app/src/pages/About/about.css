@@ -1,0 +1,4 @@
+.teros__anitmation{
+    animation: show-h1 700ms ease-in forwards;
+    opacity: 0;
+}

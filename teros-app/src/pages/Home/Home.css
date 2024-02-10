@@ -1,0 +1,36 @@
+.home__container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10%;
+}
+
+.home__container > img{
+    border: 5px solid #ffffff10;
+    border-radius: 45%;
+    box-shadow: 0px 10px 10px #fff1;
+    margin-bottom: 1rem;
+    opacity: 0;
+    margin-top: -10%;
+    animation: show-h1 1000ms ease-in forwards;
+}
+
+.home__container > h1{
+    border-radius: 8%;
+    text-shadow: 0px 10px 10px #ffffff15;
+    opacity: 0;
+    margin-top: -5%;
+    animation: show-h1 1000ms ease-in forwards;
+    font-size: 3rem;
+}
+
+@keyframes show-h1 {
+    from {
+        opacity: 0;
+        margin-top: -5%;
+    }
+    to {
+        opacity: 1;
+        margin-top: 0%;
+    }
+}
