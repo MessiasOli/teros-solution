@@ -17,7 +17,7 @@ Siga as instruções abaixo para iniciar o projeto:
 
 1. **Clone o repositório:**
    ```bash
-   git clone https://github.com/seu-usuario/open-finance-challenge.git
+   git clone https://github.com/MessiasOli/teros-solution.git
    cd open-finance-challenge
    ```
 

@@ -6,7 +6,6 @@ function About() {
   let nameProject = import.meta.env.VITE_APP_PROJECT_NAME;
   return (
     <div className="flex">
-      {/* Seção de informações à esquerda */}
       <div className="w-1/3 p-4">
         <h1 className="text-3xl font-bold">Sobre o {nameProject}</h1>
         <div className="teros__anitmation">
@@ -31,9 +30,9 @@ function About() {
         <div className="about__container overflow-x-auto teros__anitmation">
           <ul className="mt-4 space-y-2">
             {Updates.map((update, index) => (
-              <li key={index} className="px-2 py-4 rounded">
+              <li key={index + "-list"} className="px-2 py-4 rounded">
                 <strong>{update.date} - v{update.version}</strong>
-                {update.description.map(desc => (<p>{desc}&nbsp;</p>))}
+                {update.description.map((desc, key ) => (<p key={key}>{desc}&nbsp;</p>))}
               </li>
             ))}
           </ul>
