@@ -1,14 +1,17 @@
-
+using Microsoft.EntityFrameworkCore;
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Diagnostics;
-using Microsoft.Extensions.DependencyInjection;
 using System.Globalization;
 using System.Net;
 using TEROS.Api.Extensions;
 using TEROS.Application.Interfaces;
 using TEROS.Application.Validation;
+using TEROS.Application.Worker;
+using TEROS.DataAccess;
 using TEROS.Domain.Interfaces;
+using System.Text;
+using TEROS.Domain.Services;
 
 namespace TEROS.Api
 {
@@ -21,6 +24,7 @@ namespace TEROS.Api
             CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
             CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
 
+            #region Services
             builder.Services.AddCors(options =>
             {
                 options.AddDefaultPolicy(
@@ -33,13 +37,30 @@ namespace TEROS.Api
                               .AllowAnyHeader();
                     });
             });
+
             // Add services to the container.
             builder.Services.AddAuthorization();
+            builder.Services.AddSingleton<OpenBankingObserver>();
+            builder.Services.AddHostedService<OpenBankingObserver>(provider => provider.GetService<OpenBankingObserver>());
+            builder.Services.AddSingleton<IOpenBankingService, OpenBankingService>();
+
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddSwaggerGen();
             builder.Services.AddMediatR(typeof(IMediatrAssemblyMarker).Assembly);
             builder.Services.AddEndpointsApiExplorer();
+
+            builder.Services.AddDbContext<IDataContext, DataContext>(options =>
+            {
+                var passBase64 = builder.Configuration["Pass"];
+                byte[] data = Convert.FromBase64String(passBase64);
+                var password = Encoding.UTF8.GetString(data);
+
+                var connectionString = builder.Configuration["ConnectionString"]?.Replace("[PASS]", password);
+                options.UseNpgsql(connectionString);
+            });
+
+            #endregion
 
             var app = builder.Build();
 
