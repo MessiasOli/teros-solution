@@ -45,32 +45,35 @@ function Configuration() {
 
   return (
     <div>
-      <div>
-        <div className="flex w-1/3 justify-between">
-          <label>Último acesso ás listas open banking: </label>
-          <div>{configuration.lastUpdate}</div>
+      <p className="text-3xl font-bold mb-2">Configurações do sistema</p>
+      <div className="teros__anitmation">
+        <div>
+          <div className="flex w-1/3 justify-between">
+            <label>Último acesso ás listas open banking: </label>
+            <div>{configuration.lastUpdate}</div>
+          </div>
+          <div className="flex w-1/3 justify-between">
+            <label>Última atualização do sistema: </label>
+            <div>{configuration.lastSystemUpdate}</div>
+          </div>
+          <div className="flex w-1/3 justify-between">
+            <label>Status Banco de dados: </label>
+            {configuration.statusDatabase == DatabaseStatus.Disconnected ? (
+              <div className="text-red-500 font-semibold">Desconectado</div>
+            ) : (
+              <div className="text-green-500 font-semibold">Conectado</div>
+            )}
+          </div>
         </div>
-        <div className="flex w-1/3 justify-between">
-          <label>Última atualização do sistema: </label>
-          <div>{configuration.lastSystemUpdate}</div>
-        </div>
-        <div className="flex w-1/3 justify-between">
-          <label>Status Banco de dados: </label>
-          {configuration.statusDatabase == DatabaseStatus.Disconnected ? (
-            <div className="text-red-500 font-semibold">Desconectado</div>
-          ) : (
-            <div className="text-green-500 font-semibold">Conectado</div>
-          )}
-        </div>
+        <button onClick={() => window.location.reload()} className="mt-3">Atualizar</button>
+        {configuration.statusDatabase == DatabaseStatus.Disconnected ? (
+          <button className="mt-3 ml-3" onClick={() => setSendCreateDatabase(true)}>
+            <span className="flex">
+              Criar Banco de Dados
+            </span>
+          </button>
+        ) : null}
       </div>
-      <button onClick={() => window.location.reload()} className="mt-3">Atualizar</button>
-      {configuration.statusDatabase == DatabaseStatus.Disconnected ? (
-        <button className="mt-3 ml-3" onClick={() => setSendCreateDatabase(true)}>
-          <span className="flex">
-            Criar Banco de Dados
-          </span>
-        </button>
-      ) : null}
     </div>
   );
 }

@@ -1,14 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OneOf;
 using TEROS.Application.Interfaces;
-using TEROS.Domain.Model.OpenBanking;
+using TEROS.Domain.DTO;
 using TEROS.Domain.Services;
 
 namespace TEROS.Application.Commands
 {
-    public readonly record struct GetConfigurationCommand : IReq<Configuration> { }
+    public readonly record struct GetConfigurationCommand : IReq<ConfigurationDTO> { }
 
-    public class GetConfigurationHandler : IHandler<GetConfigurationCommand, Configuration>
+    public class GetConfigurationHandler : IHandler<GetConfigurationCommand, ConfigurationDTO>
     {
         private readonly IDataContext _dataContext;
         private readonly IOpenBankingService _openBankinService;
@@ -19,16 +19,15 @@ namespace TEROS.Application.Commands
             _openBankinService = openBankinService;
         }
 
-        public async Task<OneOf<Configuration>> Handle(GetConfigurationCommand request, CancellationToken cancellationToken)
+        public async Task<OneOf<ConfigurationDTO>> Handle(GetConfigurationCommand request, CancellationToken cancellationToken)
         {
             try
             {
-                var now = DateTime.Now.ToString("yyyy/MM/dd");
-                var lastVerification = _dataContext.WatchfullAcess.Where(w => w.AccessTime == now).FirstOrDefault();
+                var lastVerification = await _dataContext.Configurations.FirstOrDefaultAsync(cancellationToken);
 
                 _openBankinService.Configuration = _openBankinService.Configuration with
                 {
-                    LastUpdate = lastVerification is not null ? lastVerification.AccessTime : "-",
+                    LastUpdate = lastVerification is not null ? lastVerification.LastUpdate : "-",
                     StatusDatabase = Domain.Model.Enum.DatabaseStatus.Connected
                 };
             }
@@ -40,7 +39,7 @@ namespace TEROS.Application.Commands
                 };
             }
 
-            return _openBankinService.Configuration;
+            return new ConfigurationDTO(_openBankinService.Configuration);
         }
     }
 }

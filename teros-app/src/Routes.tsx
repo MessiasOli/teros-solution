@@ -12,7 +12,7 @@ function AppRoutes() {
         <Route index element={<Home />} /> 
         <Route path="home" element={<Home />} />
         <Route path="configuration" element={<Configuration />} />
-        <Route path="terosFinance" element={<TerosFinance />} />
+        <Route path="openBankingList" element={<TerosFinance />} />
         <Route path="about" element={<About />} />
         <Route path="*" element={<NoMatch />} />
       </Route>

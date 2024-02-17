@@ -1,5 +1,4 @@
-import IComponentIcon from "../../Interface/IComponentIcon";
-
+import IComponentIcon from "../../model/Interface/IComponentIcon";
 
 const HomeIcon: React.FC<IComponentIcon> = ({heigth = 18, width = 18, color = "#eee"}, custonClass) => (
   

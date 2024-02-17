@@ -1,4 +1,4 @@
-import IComponentIcon from "../../Interface/IComponentIcon";
+import IComponentIcon from "../../model/Interface/IComponentIcon";
 
 const MessageNotificationIcon: React.FC<IComponentIcon> = ({
   heigth = 18,

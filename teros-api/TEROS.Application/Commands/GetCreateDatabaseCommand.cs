@@ -1,16 +1,15 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using OneOf;
 using TEROS.Application.Interfaces;
-using TEROS.Domain.Model.OpenBanking;
+using TEROS.Domain.DTO;
 using TEROS.Domain.Services;
 
 namespace TEROS.Application.Commands
 {
-    public readonly record struct GetCreateDatabaseCommand : IReq<Configuration> { }
+    public readonly record struct GetCreateDatabaseCommand : IReq<ConfigurationDTO> { }
 
-    public class GetCreateDatabaseHandler : IHandler<GetCreateDatabaseCommand, Configuration>
+    public class GetCreateDatabaseHandler : IHandler<GetCreateDatabaseCommand, ConfigurationDTO>
     {
         private readonly IMediator _mediator;
         private readonly IDataContext _dataContext;
@@ -23,12 +22,12 @@ namespace TEROS.Application.Commands
             _openBankinService = openBankinService;
         }
 
-        public async Task<OneOf<Configuration>> Handle(GetCreateDatabaseCommand request, CancellationToken cancellationToken)
+        public async Task<OneOf<ConfigurationDTO>> Handle(GetCreateDatabaseCommand request, CancellationToken cancellationToken)
         {
             try
             {
                 var now = DateTime.Now.ToString("yyyy/MM/dd");
-                var lastVerification = _dataContext.WatchfullAcess.Where(w => w.AccessTime == now).FirstOrDefault();
+                var lastVerification = await _dataContext.WatchfullAcess.Where(w => w.AccessTime == now).FirstOrDefaultAsync(cancellationToken);
 
                 _openBankinService.Configuration = _openBankinService.Configuration with
                 {
@@ -43,7 +42,7 @@ namespace TEROS.Application.Commands
                 return result.AsT0;
             }
 
-            return _openBankinService.Configuration;
+            return new ConfigurationDTO(_openBankinService.Configuration);
         }
     }
 }

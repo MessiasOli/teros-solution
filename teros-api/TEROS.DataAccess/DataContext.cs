@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using TEROS.Application.Interfaces;
 using TEROS.Domain.Model.Entities;
+using TEROS.Domain.Model.OpenBanking;
 
 namespace TEROS.DataAccess
 {
@@ -11,12 +12,13 @@ namespace TEROS.DataAccess
         {
         }
 
-        public DbSet<WatchfullAcess> WatchfullAcess { get; set; }
+        public DbSet<ConfigurationEntity> Configurations { get; set; }
+        public DbSet<WatchfullAcessEntity> WatchfullAcess { get; set; }
         DatabaseFacade IDataContext.Database { get => base.Database; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<WatchfullAcess>().HasKey(w => new { w.Id });
+            modelBuilder.Entity<WatchfullAcessEntity>().HasKey(w => new { w.Id });
         }
     } 
 }
