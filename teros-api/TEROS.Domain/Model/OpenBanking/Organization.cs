@@ -68,7 +68,7 @@
         public string CustomerFriendlyDescription { get; init; }
         public string CustomerFriendlyLogoUri { get; init; }
         public string CustomerFriendlyName { get; init; }
-        public object DeveloperPortalUri { get; init; }
+        public string DeveloperPortalUri { get; init; }
         public string TermsOfServiceUri { get; init; }
         public object NotificationWebhookAddedDate { get; init; }
         public string OpenIDDiscoveryDocument { get; init; }

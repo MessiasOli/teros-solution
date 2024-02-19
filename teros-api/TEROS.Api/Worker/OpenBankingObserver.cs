@@ -1,6 +1,4 @@
-﻿using MediatR;
-using System.Diagnostics;
-using TEROS.Application.Commands;
+﻿using System.Diagnostics;
 using TEROS.Domain.Services;
 
 namespace TEROS.Application.Worker
@@ -13,13 +11,11 @@ namespace TEROS.Application.Worker
         const int UPDATE_CYCLE = 45;
 
         private IOpenBankingService _openBankinService;
-        private IMediator _mediator;
 
-        public OpenBankingObserver(IConfiguration configuration, IOpenBankingService openBankinService, IMediator mediator)
+        public OpenBankingObserver(IConfiguration configuration, IOpenBankingService openBankinService)
         {
             UrlOpenBanking = configuration["urlOpenBankingBrasil"];
             _openBankinService = openBankinService;
-            _mediator = mediator;
         }
 
         protected async override Task ExecuteAsync(CancellationToken stoppingToken)
@@ -36,7 +32,6 @@ namespace TEROS.Application.Worker
                     {
                         LastSystemUpdate = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss")
                     };
-                    //await _mediator.Send(new SaveConfigurationCommand());
 
                     await Task.Delay(TimeSpan.FromMinutes(UPDATE_CYCLE));
                 }

@@ -1,8 +1,14 @@
-export default interface IOpenBanking {
-    status : string;
+export interface IOpenBanking {
+    favorito : boolean;
     nomeEmpresa: string;
-    nomeFantazia: string;
+    nomeFantasia: string;
     logo: string;
     descricao: string;
-    urlConfiguration: string;
+    authorisationServersList: IAuthorisationServers[];
+}
+
+export interface IAuthorisationServers {
+    openIDDiscoveryDocument: string;
+    developerPortalUri: string;
+    TermsOfServiceUri: string;
 }

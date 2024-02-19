@@ -4,25 +4,39 @@ namespace TEROS.Domain.DTO
 {
     public readonly record struct OpenBankingDTO
     {
-        public OpenBankingDTO(Organization organization) : this()
+        public OpenBankingDTO(Organization organization, bool favorite) : this()
         {
             this.NomeEmpresa = organization.RegisteredName;
-            this.Status = organization.Status;
+            this.Favorito = favorite;
             var autorization = organization.AuthorisationServers.Find(a => !string.IsNullOrEmpty(a.CustomerFriendlyLogoUri));
             if (autorization is not null)
             {
                 this.Logo = autorization.CustomerFriendlyLogoUri;
-                this.URLConfiguration = autorization.OpenIDDiscoveryDocument;
                 this.Descricao = autorization.CustomerFriendlyDescription;
-                this.NomeFantazia = autorization.CustomerFriendlyName;
+                this.NomeFantasia = autorization.CustomerFriendlyName;
             }
+            this.AuthorisationServersList = organization.AuthorisationServers.Select(o => new AuthorisationServersDTO(o)).ToList();
         }
-        
-        public string Status { get; init; }
+
+        public bool Favorito { get; init; }
         public string NomeEmpresa { get; init; }
-        public string NomeFantazia { get; init; }
+        public string NomeFantasia { get; init; }
         public string Logo { get; init; }
         public string Descricao { get; init; }
-        public string URLConfiguration { get; init; }
+        public List<AuthorisationServersDTO> AuthorisationServersList { get; init; }
+    }
+
+    public readonly record struct AuthorisationServersDTO
+    {
+        public AuthorisationServersDTO(AuthorisationServer o) : this()
+        {
+            OpenIDDiscoveryDocument = o.OpenIDDiscoveryDocument ?? string.Empty;
+            DeveloperPortalUri = o.DeveloperPortalUri;
+            TermsOfServiceUri = o.TermsOfServiceUri;
+        }
+
+        public string OpenIDDiscoveryDocument { get; init; }
+        public string DeveloperPortalUri { get; init; }
+        public string TermsOfServiceUri { get; init; }
     }
 }

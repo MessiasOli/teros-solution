@@ -2,7 +2,7 @@ import { FC, useState } from "react";
 import InfoIcon from "../../../components/Icons/InfoIcon";
 import ModalGeneric from "../../../components/ModalGeneric/ModalGeneric";
 
-const MostrarDetalhes: FC<{ msg: string, nomeFantazia:string, urlImg:string }> = ({ msg, nomeFantazia, urlImg }) => {
+const ShowDetails: FC<{ msg: string, nomeFantasia:string, urlImg:string }> = ({ msg, nomeFantasia, urlImg }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
@@ -24,7 +24,7 @@ const MostrarDetalhes: FC<{ msg: string, nomeFantazia:string, urlImg:string }> =
       <ModalGeneric isOpen={isModalOpen} onClose={closeModal} size="lg">
         <div className="px-4 flex flex-col  text-black">
             <div className="flex w-full border-b-4 border-cblue text-xl font-semibold">
-            <strong>{nomeFantazia}</strong>: Informações
+            <strong>{nomeFantasia}</strong>: Informações
             </div>
             <div className="flex w-full flex-row h-[15vh] bg-cblue rounded-b px-2 border-b-4 text-center overflow-y-auto">
               <div className="flex justify-center teros__anitmation w-2/6"><img className="p-1" src={urlImg} alt="Logo" /></div>
@@ -47,4 +47,4 @@ const MostrarDetalhes: FC<{ msg: string, nomeFantazia:string, urlImg:string }> =
   );
 };
 
-export default MostrarDetalhes;
+export default ShowDetails;

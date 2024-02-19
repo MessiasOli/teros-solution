@@ -3,7 +3,6 @@ import { useQuery } from "react-query";
 import DefaultResponse from "../../model/DefaultResponse";
 import Carregando from "../../components/Carregando";
 import ErroCarregar from "../../components/ErroCarregar";
-import IOpenBanking from "../../model/Interface/IOpenBanking";
 import {
   flexRender,
   getCoreRowModel,
@@ -12,6 +11,7 @@ import {
 import { columnsOpenBanking } from "./TableConfig";
 import React from "react";
 import { DebouncedInput } from "./DebounceInput";
+import { IOpenBanking } from "../../model/Interface/IOpenBanking";
 
 function TerosFinance() {
   const [globalFilter, setGlobalFilter] = React.useState("");
@@ -32,19 +32,24 @@ function TerosFinance() {
       onSuccess: (resp) => {
         setOpenBankingList(resp.data);
         setOpenBankingFiltered(resp.data);
+        applyFilter();
       },
     }
   );
 
-  React.useEffect(() => {
+  function applyFilter() {
     if (globalFilter.length > 0) {
       let filtered = openBankingList.filter(
         (o) =>
           o.nomeEmpresa.toUpperCase().includes(globalFilter.toUpperCase()) ||
-          o.nomeFantazia.toUpperCase().includes(globalFilter.toUpperCase())
+          o.nomeFantasia.toUpperCase().includes(globalFilter.toUpperCase())
       );
       setOpenBankingFiltered(filtered);
     } else setOpenBankingFiltered(openBankingList);
+  }
+
+  React.useEffect(() => {
+    applyFilter()
   }, [globalFilter]);
 
   if (queryLoading.isLoading) return <Carregando />;
@@ -58,14 +63,14 @@ function TerosFinance() {
           <DebouncedInput
             value={globalFilter ?? ""}
             onChange={(value) => setGlobalFilter(String(value))}
-            className="p-2 mb-2 font-lg shadow border border-block"
+            className="p-1 mb-2 text-lg shadow border border-block"
             placeholder="Pesquise rápido aqui..."
           />
           <div className="self-end mr-2">
             <p>Número de linhas: {openBankingFiltered.length}</p>
           </div>
         </div>
-        <div className="h-[78vh] overflow-y-auto mt-4 teros__anitmation">
+        <div className="table__openfinance h-[68vh] overflow-y-auto mt-4 teros__anitmation">
           <table { ...{style: { width: "100%"}} }>
             <thead className="sticky top-0">
               {table.getHeaderGroups().map((headerGroup) => (
@@ -98,6 +103,7 @@ function TerosFinance() {
               ))}
             </tbody>
           </table>
+          {!openBankingFiltered.length && globalFilter.length > 0 ? <p>A palavra <strong>{globalFilter}</strong> não foi encontrada em nossos registros. 😊</p> : null }
         </div>
       </div>
     </div>

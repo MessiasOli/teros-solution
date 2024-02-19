@@ -11,5 +11,7 @@ public interface IDataContext
     public DatabaseFacade Database { get; }
     DbSet<WatchfullAcessEntity> WatchfullAcess { get; set; }
     DbSet<ConfigurationEntity> Configurations { get; set; }
+    DbSet<OpenBankingEntity> OpenBanking { get; set; }
+
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

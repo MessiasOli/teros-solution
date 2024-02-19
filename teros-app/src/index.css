@@ -220,9 +220,11 @@ body {
   height: 25.5rem;
 }
 
-
-@media (min-height: 923px) {
+@media (min-height: 911px) {
   .about__container{
-    height: 48rem;
-  }  
+    height: 47rem;
+  }
+  .table__openfinance{
+    height: 79vh;
+  }
 }
