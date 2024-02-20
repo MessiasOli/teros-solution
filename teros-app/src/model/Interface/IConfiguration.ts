@@ -4,4 +4,5 @@ export interface IConfiguration {
     lastUpdate: string,
     lastSystemUpdate: string,
     statusDatabase: DatabaseStatus,
+    updateCycle: number
 }

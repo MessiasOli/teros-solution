@@ -2,7 +2,6 @@
 using OneOf;
 using TEROS.Application.Interfaces;
 using TEROS.Domain.Model.Entities;
-using TEROS.Domain.Services;
 
 namespace TEROS.Application.Commands
 {

@@ -10,10 +10,13 @@ namespace TEROS.Domain.DTO
             LastSystemUpdate = configuration.LastSystemUpdate;
             LastUpdate = configuration.LastUpdate;
             StatusDatabase = configuration.StatusDatabase;
+            UpdateCycle = configuration.UpdateCycle;
+
         }
 
         public string LastSystemUpdate { get; init; }
         public string LastUpdate { get; init; }
+        public int UpdateCycle { get; init; }
         public DatabaseStatus StatusDatabase { get; init; }
     }
 }

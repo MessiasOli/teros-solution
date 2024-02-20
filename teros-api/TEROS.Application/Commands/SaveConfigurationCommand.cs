@@ -6,7 +6,10 @@ using TEROS.Domain.Services;
 
 namespace TEROS.Application.Commands
 {
-    public readonly record struct SaveConfigurationCommand : IReq<ConfigurationEntity> { }
+    public readonly record struct SaveConfigurationCommand : IReq<ConfigurationEntity> 
+    {
+        public int UpdateCycle { get; init; }
+    }
 
     public class SaveConfigurationHandler : IHandler<SaveConfigurationCommand, ConfigurationEntity>
     {
@@ -25,6 +28,7 @@ namespace TEROS.Application.Commands
             if (configuration != null)
             {
                 configuration.LastUpdate = _openBankinService.Configuration.LastUpdate;
+                configuration.UpdateCycle = request.UpdateCycle is not -9999 ? request.UpdateCycle : configuration.UpdateCycle;
                 _dataContext.Configurations.Update(configuration);
             }
             else
@@ -34,6 +38,7 @@ namespace TEROS.Application.Commands
                     LastSystemUpdate = _openBankinService.Configuration.LastSystemUpdate,
                     LastUpdate = _openBankinService.Configuration.LastUpdate,
                     StatusDatabase = _openBankinService.Configuration.StatusDatabase,
+                    UpdateCycle = request.UpdateCycle is not -9999 ? request.UpdateCycle : 15
                 };
                 _dataContext.Configurations.Add(configuration);
             }

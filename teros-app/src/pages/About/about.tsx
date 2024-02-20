@@ -62,7 +62,7 @@ function About() {
 
       <div className="w-2/3 p-4 border-l">
         <h1 className="text-3xl font-bold">Atualizações</h1>
-        <div className="about__container overflow-x-auto teros__anitmation">
+        <div className="about__container teros__anitmation overflow-y-auto">
         <p className="mt-4">
             <strong>Versão atual:</strong> v {version}
           </p>

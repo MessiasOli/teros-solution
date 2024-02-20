@@ -1,15 +1,15 @@
 ﻿using OneOf;
 using TEROS.Application.Interfaces;
-using TEROS.Domain.Model;
+using TEROS.Domain.DTO;
 
 namespace TEROS.Application.Queries;
 
-public readonly record struct ApiRunningQuery : IReq<Message> { }
+public readonly record struct ApiRunningQuery : IReq<MessageDTO> { }
 
-public class ApiRunningHandler : IHandler<ApiRunningQuery, Message>
+public class ApiRunningHandler : IHandler<ApiRunningQuery, MessageDTO>
 {
-    public async Task<OneOf<Message>> Handle(ApiRunningQuery request, CancellationToken cancellationToken)
+    public async Task<OneOf<MessageDTO>> Handle(ApiRunningQuery request, CancellationToken cancellationToken)
     {
-        return new Message("TEROS API is running.");
+        return new MessageDTO("TEROS API is running.");
     }
 }

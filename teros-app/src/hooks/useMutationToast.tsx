@@ -94,7 +94,8 @@ export default function useMutationToast<TVariables>(
         },
       },
     });
-
+    
+    console.log("invalidateQueryKey:", invalidateQueryKey)
     typeof invalidateQueryKey === "string"
       ? queryClient.invalidateQueries(invalidateQueryKey)
       : invalidateQueryKey.forEach(query => queryClient.invalidateQueries(query));

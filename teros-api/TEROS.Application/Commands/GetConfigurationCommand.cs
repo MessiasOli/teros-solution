@@ -12,6 +12,7 @@ namespace TEROS.Application.Commands
     {
         private readonly IDataContext _dataContext;
         private readonly IOpenBankingService _openBankinService;
+        private int UpdateCycle_Min = 15;
 
         public GetConfigurationHandler(IDataContext dataContext, IOpenBankingService openBankinService)
         {
@@ -28,14 +29,16 @@ namespace TEROS.Application.Commands
                 _openBankinService.Configuration = _openBankinService.Configuration with
                 {
                     LastUpdate = lastVerification is not null ? lastVerification.LastUpdate : "-",
-                    StatusDatabase = Domain.Model.Enum.DatabaseStatus.Connected
+                    StatusDatabase = Domain.Model.Enum.DatabaseStatus.Connected,
+                    UpdateCycle = lastVerification is not null && lastVerification.UpdateCycle > 0 ? lastVerification.UpdateCycle : UpdateCycle_Min
                 };
             }
             catch
             {
                 _openBankinService.Configuration = _openBankinService.Configuration with
                 {
-                    StatusDatabase = Domain.Model.Enum.DatabaseStatus.Disconnected
+                    StatusDatabase = Domain.Model.Enum.DatabaseStatus.Disconnected,
+                    UpdateCycle = UpdateCycle_Min
                 };
             }
 

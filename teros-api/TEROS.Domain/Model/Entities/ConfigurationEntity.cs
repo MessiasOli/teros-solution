@@ -7,6 +7,7 @@ namespace TEROS.Domain.Model.Entities
         public Guid Id { get; set; }
         public string LastSystemUpdate { get; set; }
         public string LastUpdate { get; set; }
+        public int UpdateCycle { get; set; }
         public DatabaseStatus StatusDatabase { get; set; }
     }
 }

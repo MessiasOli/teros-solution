@@ -32,7 +32,8 @@ function TerosFinance() {
       onSuccess: (resp) => {
         setOpenBankingList(resp.data);
         setOpenBankingFiltered(resp.data);
-        applyFilter();
+        if (globalFilter.length > 0)
+          applyFilter();
       },
     }
   );

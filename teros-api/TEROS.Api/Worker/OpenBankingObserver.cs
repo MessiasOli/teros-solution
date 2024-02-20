@@ -1,20 +1,24 @@
 ﻿using System.Diagnostics;
+using System.Net.Http.Headers;
+using System.Text;
 using TEROS.Domain.Services;
+using TEROS.Domain.Utils;
 
 namespace TEROS.Application.Worker
 {
     public class OpenBankingObserver : BackgroundService
     {
         public string UrlOpenBanking { get; init; }
+        public string UrlApiTeros { get; init; }
         public DateTime LastSystemUpdate { get; set; }
         public DateTime LastFrontUpdate { get; set; }
-        const int UPDATE_CYCLE = 45;
 
         private IOpenBankingService _openBankinService;
 
         public OpenBankingObserver(IConfiguration configuration, IOpenBankingService openBankinService)
         {
             UrlOpenBanking = configuration["urlOpenBankingBrasil"];
+            UrlApiTeros = configuration["urlApiTeros"];
             _openBankinService = openBankinService;
         }
 
@@ -25,6 +29,8 @@ namespace TEROS.Application.Worker
 
             try
             {
+                await LoadConfiguration();
+
                 while (!stoppingToken.IsCancellationRequested)
                 {
                     await ProcessOrganizations();
@@ -33,7 +39,8 @@ namespace TEROS.Application.Worker
                         LastSystemUpdate = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss")
                     };
 
-                    await Task.Delay(TimeSpan.FromMinutes(UPDATE_CYCLE));
+                    await UpdateConfiguration();
+                    await Task.Delay(TimeSpan.FromMinutes(_openBankinService.Configuration.UpdateCycle));
                 }
             }
             catch (Exception e)
@@ -42,6 +49,50 @@ namespace TEROS.Application.Worker
                 Debug.WriteLine("O monitoramento foi finalizado!");
             }
 
+        }
+
+        private async Task LoadConfiguration()
+        {
+            string apiUrl = $"{UrlApiTeros}/worker/getconfiguration";
+
+            using (HttpClient httpClient = new HttpClient())
+            {
+                HttpResponseMessage response = await httpClient.GetAsync(apiUrl);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string responseData = await response.Content.ReadAsStringAsync();
+                    Console.WriteLine($"Carga das configurações no banco de dados com sucesso!: {responseData}");
+                }
+                else
+                {
+                    Console.WriteLine($"Falha ao carregar as configurações banco de dados: {response.StatusCode} - {response.ReasonPhrase}");
+                }
+            }
+        }
+
+        private async Task UpdateConfiguration()
+        {
+            string apiUrl = $"{UrlApiTeros}/SaveConfiguration";
+
+            using (HttpClient httpClient = new HttpClient())
+            {
+                int UpdateCycle = -9999;
+                string requestBody = (new { UpdateCycle }).SerializeJsonObject();
+                httpClient.DefaultRequestHeaders.Accept.Clear();
+                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/vnd.github.v3+json"));
+                HttpResponseMessage response = await httpClient.PostAsync(apiUrl, new StringContent(requestBody, Encoding.UTF8, "application/json"));
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string responseData = await response.Content.ReadAsStringAsync();
+                    Console.WriteLine($"Atualização das configurações no banco de dados com sucesso!: {responseData}");
+                }
+                else
+                {
+                    Console.WriteLine($"Falha ao atualizar as configurações banco de dados: {response.StatusCode} - {response.ReasonPhrase}");
+                }
+            }
         }
 
         private async Task ProcessOrganizations()
@@ -63,6 +114,5 @@ namespace TEROS.Application.Worker
                 Console.WriteLine($"Erro durante o processamento das organizações: {ex.Message}");
             }
         }
-
     }
 }

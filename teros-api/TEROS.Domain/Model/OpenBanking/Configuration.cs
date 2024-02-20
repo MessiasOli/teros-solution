@@ -6,6 +6,7 @@ namespace TEROS.Domain.Model.OpenBanking
     {
         public string LastSystemUpdate { get; init; }
         public string LastUpdate { get; init; }
+        public int UpdateCycle { get; init; }
         public DatabaseStatus StatusDatabase { get; init; }
     }
 }

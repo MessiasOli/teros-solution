@@ -43,6 +43,7 @@ namespace TEROS.Api
             builder.Services.AddSingleton<OpenBankingObserver>();
             builder.Services.AddHostedService<OpenBankingObserver>(provider => provider.GetService<OpenBankingObserver>());
             builder.Services.AddSingleton<IOpenBankingService, OpenBankingService>();
+            builder.Services.AddSingleton<ICalculateTimeService, CalculateTimeService>();
 
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
