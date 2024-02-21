@@ -1,0 +1,230 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: #FAFFFD;
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  --primary-hue: 210;
+  --second-hue: 285;
+  --black-lightness: 10%;
+  --dark-lightness: 20%;
+  --middle-lightness: 44%;
+  --light-lightness: 94%;
+  --white-lightness: 100%;
+  --color-primary: hsl(var(--primary-hue), 89%, 41%);
+  --color-second: hsl(var(--second-hue), 89%, 41%);
+  --color-white: hsl(0, 5%, var(--white-lightness));
+  --color-light: hsl(var(--primary-hue), 5%, var(--light-lightness));
+  --color-middle: hsl(var(--primary-hue), 5%, var(--middle-lightness));
+  --color-middle-second: hsl(var(--second-hue), 5%, var(--middle-lightness));
+  --color-black: hsl(var(--primary-hue), 5%, var(--black-lightness));
+  --color-dark: hsl(var(--primary-hue), 5%, var(--dark-lightness));
+  --box-shadow: 0 1px 5px var(--color-middle-second);
+
+  --transition: all 500ms ease;
+}
+
+a {
+  font-weight: 500;
+  color: var(--color-middle);
+  text-decoration: inherit;
+}
+a:hover {
+  color: var(--color-second);
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: var(--color-middle);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+button:hover {
+  background-color: var(--color-primary);
+  border-color: var(--color-light);
+  box-shadow: var(--box-shadow);
+}
+
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+.active{
+  color: var(--color-primary) !important;
+  margin-left: 1rem;
+  transform: var(--transition);
+  text-shadow: 0 0.5px 0.4px var(--color-dark);
+  cursor: default;
+}
+
+body {
+  margin: 0;
+  display: block !important;
+  place-items: start !important;
+  min-width: inherit !important; 
+  min-height: inherit !important;
+}
+
+.app__content{
+  display: grid;
+  grid-template-rows: 70px 1fr;
+  grid-template-columns: 200px calc(100% - 200px);
+  height: 100vh;
+}
+
+.header__content{
+  grid-column-end: 2 span;
+}
+
+.view__area{
+  height: 100%;
+  overflow-y: auto;
+}
+
+.teros__anitmation {
+  opacity: 0;
+  animation: show-h1 1000ms ease-in forwards;
+}
+
+.move-up{
+  transition: var(--transition);
+}
+
+.move-up:hover{
+  margin-bottom: 1rem;
+}
+
+.success {
+  color: #4f4;
+}
+
+.fail {
+  color: #f44;
+}
+
+.selected{
+  background-color: var(--color-second);
+}
+
+.color__primary{
+  background-color: var(--color-primary);
+}
+
+.color__second{
+  background-color: var(--color-second);
+}
+
+.color__dark{
+  background-color: var(--color-dark);
+}
+
+.icon__bt {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  border-radius: 50%;
+  background-color: var(--color-primary);
+  cursor: pointer;
+  box-shadow: var(--box-shadow);
+  transition: var(--transition);
+}
+
+.icon__bt:hover {
+  background-color: var(--color-second);
+}
+
+.icon__bt:active {
+  background-color: var(--color-middle-second);
+}
+
+.icon__bt.disabled,
+.icon__bt.disabled:hover,
+.disabled:active {
+  background-color: var(--color-middle);
+  cursor: default;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--color-black);
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-second);
+  width: 10px;
+  height: 10px;
+}
+
+.bg-modal {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+.rotating {
+  background: var(--color-second);
+  animation: rotate 1.5s linear infinite;
+}
+
+.about__container{
+  height: 25.5rem;
+}
+
+@media (min-height: 911px) {
+  .about__container{
+    height: 47rem;
+  }
+  .table__openfinance{
+    height: 79vh;
+  }
+}
