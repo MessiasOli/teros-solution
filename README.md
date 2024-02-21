@@ -8,7 +8,7 @@ O desafio de desenvolvimento Open Finance propõe a criação de um módulo de a
 
 Siga as instruções abaixo para iniciar o projeto:
 
-### Estrtura do Repositório`
+### Estrtura do Repositório
 
 ```
 ├── SQL           <- Arquivos para criação do banco de dados.
