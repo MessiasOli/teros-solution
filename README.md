@@ -11,15 +11,17 @@ Siga as instruções abaixo para iniciar o projeto:
 ### Estrtura do Repositório`
 
 ```
-├── teros-api     <- arquivos backend
+├── SQL           <- Arquivos para criação do banco de dados.
 |
-├── teros-app     <- arquivos frontend
+├── teros-api     <- Arquivos backend.
 |
-├── .gitignore    <- ignoradar arquivos para o git
+├── teros-app     <- Arquivos frontend.
 |
-├── LICENSE       <- licenças
+├── .gitignore    <- ignoradar arquivos para o git.
 |
-├── README        <- Notas
+├── LICENSE       <- licenças.
+|
+├── README        <- Notas.
 ```
 
 ### Estrtura do backend
@@ -71,11 +73,12 @@ Siga as instruções abaixo para iniciar o projeto:
 1. **Clone o repositório:**
    ```bash
    git clone https://github.com/MessiasOli/teros-solution.git
-   cd open-finance-challenge
+   cd teros-solution
    ```
 
 2. **Instale as dependências:**
    ```bash
+   cd teros-app
    yarn install
    ```
 
@@ -86,20 +89,20 @@ Siga as instruções abaixo para iniciar o projeto:
 4. **Execute o projeto:**
    - Inicie o backend:
      ```bash
-     cd backend
-     yarn start
+     cd teros-api
+     dotnet run
      ```
    - Inicie o frontend:
      ```bash
-     cd frontend
-     yarn start
+     cd teros-app
+     yarn dev
      ```
 
 5. **Acesse a aplicação:**
    - Abra o navegador e acesse a aplicação no endereço fornecido durante a inicialização do frontend.
 
 6. **Atualização automática da lista:**
-   - O módulo deve atualizar a lista de participantes automaticamente a cada 1 hora. Verifique se esse processo está funcionando corretamente.
+   - O módulo deve atualizar a lista de participantes automaticamente a cada 15 min padrão. Verifique se esse processo está funcionando corretamente.
 
 ### Entrega e Avaliação
 

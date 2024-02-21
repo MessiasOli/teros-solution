@@ -57,6 +57,15 @@ const Updates: Update[] = [
       "- Criado histórico para dar boas vindas."
     ],
   },
+  {
+    date: "20/02/2024",
+    version: "1.0.0",
+    description: [
+      "- Criado testes frontend E2E com cypress.",
+      "- Corrigido documentação do projeto",
+      "- Adicionado arquivos de criação de banco de dados."
+    ],
+  },
 ];
 
 export default Updates;
