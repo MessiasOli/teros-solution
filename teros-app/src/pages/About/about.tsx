@@ -7,7 +7,7 @@ function About() {
   return (
     <div className="flex">
       <div className="w-1/3 p-4">
-        <h1 className="text-3xl font-bold">Sobre o {nameProject}</h1>
+        <h1 id="title-sobre" className="text-3xl font-bold">Sobre o {nameProject}</h1>
         <div className="teros__anitmation">
           <div className="mt-4 text-lg">
             <strong>Objetivo: </strong>

@@ -8,6 +8,59 @@ O desafio de desenvolvimento Open Finance propõe a criação de um módulo de a
 
 Siga as instruções abaixo para iniciar o projeto:
 
+### Estrtura do Repositório`
+
+```
+├── teros-api     <- arquivos backend
+|
+├── teros-app     <- arquivos frontend
+|
+├── .gitignore    <- ignoradar arquivos para o git
+|
+├── LICENSE       <- licenças
+|
+├── README        <- Notas
+```
+
+### Estrtura do backend
+
+```
+├── TEROS.Api              <- Backend do projeto (lógica de servidor, APIs).
+|
+├── TEROS.Application      <- Arquivos das camadas mais externas intermediaria entre controller e domain (Commands, Query, Extensions, Interfaces e Validações)
+|
+├── TEROS.DataAccess       <- Arquivos voltados ao acesso e interação com o banco de dados (Migrations, DataContext).
+|
+├── TEROS.Domain           <- Lógica de domínio do projeto (modelos, regras de negócios).
+|
+├── TEROS.Tests            <- Testes relacionados ao projeto (Shoulds xUnit).
+```
+
+### Estrtura do frontend
+
+```
+├── cypress          <- Contém arquivos relacionados ao teste de front-end, 
+|   ├── e2e          <- O diretório `e2e` contem testes end-to-end específicos.
+|
+├── public           <- Arquivos publicos compartilhado com cada cliente.
+|
+├── src              <- Centraliza arquivos voltados ao desenvolvimento do front-end, como componentes, estilos e lógica da aplicação. 
+|   |
+|   ├── assets       <- Recursos estáticos, como imagens
+|   ├── common       <- Código comum utilizado em várias partes do front-end.
+|   ├── components   <- Componentes reutilizáveis.
+|   ├── hooks        <- Hooks personalizados para a lógica compartilhada.
+|   ├── layout       <- Arquivos relacionados ao layout da aplicação.
+|   ├── model        <- Definições de modelos.
+|   ├── pages        <- Componentes específicos de páginas.
+|   ├── utils        <- Utilitários diversos.
+|   ├── ...          <- Outros diretórios conforme necessário.
+|   
+├── .env.example     <- Exemplo de arquivo de ambiente que contém configurações sensíveis e não deve ser versionado. 
+|
+├── ...              <- Demais arquivos padrões.
+```
+
 ### Pré-requisitos
 
 - Certifique-se de ter o Node.js instalado em seu sistema.

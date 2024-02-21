@@ -97,7 +97,7 @@ function Configuration() {
           </div>
           <div className="flex w-3/5 justify-between">
             <label>Tempo de refresh dos dados open banking [15-60] (Minutos): </label>
-            <input className="px-2" type="number" min={MIN_VALUE} max={MAX_VALUE} value={configuration.updateCycle} onChange={event => handlerChange(event?.target?.value)} />
+            <input id="change-refresh-time" className="px-2" type="number" min={MIN_VALUE} max={MAX_VALUE} value={configuration.updateCycle} onChange={event => handlerChange(event?.target?.value)} />
           </div>
         </div>
         <button onClick={() => window.location.reload()} className="mt-3">Atualizar</button>
@@ -107,7 +107,7 @@ function Configuration() {
           </button>
         ) : null}
         {updateCycle ? (
-          <button className="mt-3 ml-3" onClick={() => handlerSalvarConfiguracoes()}>
+          <button id="btn-salvar" className="mt-3 ml-3" onClick={() => handlerSalvarConfiguracoes()}>
               Salvar
           </button>
         ) : null}
