@@ -19,7 +19,7 @@ Siga as instruções abaixo para iniciar o projeto:
 |
 ├── .gitignore    <- ignoradar arquivos para o git.
 |
-├── LICENSE       <- licenças.
+├── LICENSE       <- licença.
 |
 ├── README        <- Notas.
 ```
@@ -56,7 +56,7 @@ Siga as instruções abaixo para iniciar o projeto:
 |   ├── model        <- Definições de modelos.
 |   ├── pages        <- Componentes específicos de páginas.
 |   ├── utils        <- Utilitários diversos.
-|   ├── ...          <- Outros diretórios conforme necessário.
+|   ├── ...          <- Outros arquivos conforme necessário.
 |   
 ├── .env.example     <- Exemplo de arquivo de ambiente que contém configurações sensíveis e não deve ser versionado. 
 |
